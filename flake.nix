@@ -29,7 +29,7 @@
   outputs = { nixpkgs, llvm-ez80, toolchain, convbin, self, decbot4Src, flake-utils }@inputs:
     nixpkgs.lib.recursiveUpdate (flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
       let pkgsSelf = self.packages.${system}; in
-    with import nixpkgs { inherit system; }; {
+    with import nixpkgs { inherit system; config.allowUnfree = true; }; {
       templates.ce-toolchain = {
         path = ./template;
         description = "A Hello World program for the TI-84 Plus CE";
@@ -83,7 +83,7 @@
               Please install a toolchain, such as the CE C toolchain.
             '';
             homepage = "https://github.com/jacobly0/llvm-project";
-            license = lib.licenses.asl20-llvm;
+            #license = lib.licenses.asl20-llvm;
             maintainers = with lib.maintainers; [ clevor ];
             platforms = lib.platforms.unix;
           };

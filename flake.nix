@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     llvm-ez80 = {
-      url = "github:jacobly0/llvm-project";
+      url = "github:CE-Programming/llvm-project";
       flake = false;
     };
     toolchain = {
@@ -106,7 +106,7 @@
           name = "ce-toolchain";
           patchPhase = ''
             substituteInPlace src/common.mk --replace-fail \
-              "INSTALL_DIR := \$(DESTDIR)\$(PREFIX)" "INSTALL_DIR := $out"
+              "INSTALL_DIR := \$(patsubst %/,%,\$(subst \\,/,\$(DESTDIR)))/\$(PREFIX)" "INSTALL_DIR := $out"
             substituteInPlace makefile --replace-fail \
               "TOOLS := fasmg convbin convimg convfont cedev-config" \
               "TOOLS := fasmg cedev-config" --replace-fail \

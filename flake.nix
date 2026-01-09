@@ -1,6 +1,5 @@
 {
     description = "A collection of packages for the TI-84 Plus CE graphing calculator.";
-
     inputs = {
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
         llvm-ez80 = {
@@ -19,6 +18,12 @@
             url = "https://github.com/mateoconlechuga/convbin";
             submodules = true;
         };
+        cemu-ti = {
+            flake = false;
+            type = "git";
+            url = "https://github.com/CE-Programming/CEmu";
+            submodules = true;
+        };
         flake-utils.url = "github:numtide/flake-utils";
     };
 
@@ -29,6 +34,7 @@
         convbin,
         self,
         flake-utils,
+        ...
     } @ inputs:
         flake-utils.lib.eachSystem [
             "x86_64-linux"
@@ -57,6 +63,9 @@
                     ce-libs = callPackageSelf ./packages/ce-libs {};
                     ce-toolchain = callPackageSelf ./packages/ce-toolchain {
                         ce-toolchain-src = toolchain;
+                    };
+                    cemu-ti = callPackage ./packages/cemu-ti {
+                        cemu-ti-src = inputs.cemu-ti;
                     };
                     mkDerivation = callPackageSelf ./packages/mkDerivation {};
                 };

@@ -1,5 +1,23 @@
 {
   "nodes": {
+    "cemu-ti": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767519126,
+        "narHash": "sha256-6XFZtzwQT+DaCZjO9VbtmZiF5sO0J36FBjQA2bmdp5o=",
+        "ref": "refs/heads/master",
+        "rev": "516d420d1ab929472f78b3ecc8366b35520f1041",
+        "revCount": 2606,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/CE-Programming/CEmu"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/CE-Programming/CEmu"
+      }
+    },
     "convbin": {
       "flake": false,
       "locked": {
@@ -70,6 +88,7 @@
     },
     "root": {
       "inputs": {
+        "cemu-ti": "cemu-ti",
         "convbin": "convbin",
         "flake-utils": "flake-utils",
         "llvm-ez80": "llvm-ez80",

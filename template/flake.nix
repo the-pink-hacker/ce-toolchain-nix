@@ -1,6 +1,5 @@
 {
-    inputs.toolchain.url = "github:myclevorname/flake";
-
+    inputs.toolchain.url = "github:the-pink-hacker/ce-toolchain-nix";
     outputs = {
         self,
         toolchain,

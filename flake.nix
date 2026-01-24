@@ -59,7 +59,10 @@
                 in {
                     fasmg-patch = callPackage ./packages/fasmg {};
                     convbin-unstable = callPackage ./packages/convbin {convbin-src = convbin;};
-                    llvm-ez80 = callPackage ./packages/llvm-ez80 {llvm-ez80-src = llvm-ez80;};
+                    llvm-ez80 = callPackage ./packages/llvm-ez80 {
+                        llvm-ez80-src = llvm-ez80;
+                        stdenv = pkgs.llvmPackages.stdenv;
+                    };
                     ce-libs = callPackageSelf ./packages/ce-libs {};
                     ce-toolchain = callPackageSelf ./packages/ce-toolchain {
                         ce-toolchain-src = toolchain;

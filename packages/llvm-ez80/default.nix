@@ -4,15 +4,27 @@
     cmake,
     python3,
     lib,
-}:
-stdenv.mkDerivation (final: {
+    samurai,
+}: let
+    cmakeFlags = builtins.concatStringsSep " " [
+        "-GNinja"
+        "-DCMAKE_BUILD_TYPE=Release"
+        "-DLLVM_ENABLE_PROJECTS=\"clang;clang-tools-extra\""
+        "-DLLVM_TARGETS_TO_BUILD="
+        "-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=Z80"
+        "-DBUILD_SHARED_LIBS=OFF"
+        "-DLLVM_INCLUDE_EXAMPLES:BOOL=OFF"
+        "-DLLVM_INCLUDE_TESTS:BOOL=OFF"
+        "-DLLVM_ENABLE_ZSTD:BOOL=OFF"
+    ];
+in stdenv.mkDerivation (final: {
     pname = "llvm-ez80";
     version = "0-unstable";
     src = llvm-ez80-src;
     configurePhase = ''
         mkdir build
         cd build
-        cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS=clang -DLLVM_TARGETS_TO_BUILD= -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=Z80
+        cmake ../llvm ${cmakeFlags}
         cd ..
     '';
     buildPhase = ''
@@ -41,5 +53,9 @@ stdenv.mkDerivation (final: {
         platforms = lib.platforms.unix;
     };
     doCheck = false;
-    nativeBuildInputs = [cmake python3];
+    nativeBuildInputs = [
+        cmake
+        python3
+        samurai
+    ];
 })

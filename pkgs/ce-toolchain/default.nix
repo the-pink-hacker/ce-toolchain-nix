@@ -31,6 +31,7 @@ stdenv.mkDerivation {
             --replace-fail "\$(call NATIVEPATH,\$(BIN)/convimg\$(EXE_SUFFIX))" "${convimg}/bin/convimg" \
             --replace-fail "\$(call NATIVEPATH,\$(BIN)/cemu-autotester\$(EXE_SUFFIX))" "cemu-autotester" \
             --replace-fail "\$(call NATIVEPATH,\$(BIN)/ez80-clang\$(EXE_SUFFIX))" "${llvm-ez80}/bin/ez80-clang" \
+            --replace-fail "\$(call NATIVEPATH,\$(BIN)/ez80-link\$(EXE_SUFFIX))" "${llvm-ez80}/bin/ez80-link" \
             --replace-fail "\$(call NATIVEPATH,\$(BINUTILS_BIN)/z80-none-elf-as\$(EXE_SUFFIX))" "${binutils-gdb}/bin/z80-none-elf-as" \
             --replace-fail "\$(call NATIVEPATH,\$(BINUTILS_BIN)/z80-none-elf-ld\$(EXE_SUFFIX))" "${binutils-gdb}/bin/z80-none-elf-ld" \
             --replace-fail "\$(call NATIVEPATH,\$(BINUTILS_BIN)/z80-none-elf-objcopy\$(EXE_SUFFIX))" "${binutils-gdb}/bin/z80-none-elf-objcopy" \

@@ -1,0 +1,26 @@
+{
+    stdenv,
+    binutils-gdb-src,
+    mpfr,
+    bison,
+    texinfo,
+    flex,
+    perl,
+}:
+
+stdenv.mkDerivation (final: {
+    pname = "binutils-gdb";
+    version = "unstable";
+    src = binutils-gdb-src;
+    buildInputs = [
+        mpfr
+        bison
+        texinfo
+        flex
+        perl
+    ];
+    enableParallelBuilding = true;
+    configurePhase = ''
+        ./configure --target=z80-none-elf --with-zstd=no --disable-sim --disable-nls --disable-plugins --without-python --prefix="$out"
+    '';
+})

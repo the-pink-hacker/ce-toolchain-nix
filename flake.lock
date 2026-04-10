@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "binutils-gdb": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769820397,
+        "narHash": "sha256-3ZvgnU/etooW3o9497/LoMyJmMnWIEhMvBPIdBgrJfQ=",
+        "owner": "CE-Programming",
+        "repo": "binutils-gdb",
+        "rev": "bdf0e52cab29cd946beb4f785330cbc35a98b9c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "CE-Programming",
+        "repo": "binutils-gdb",
+        "type": "github"
+      }
+    },
     "cemu-ti": {
       "flake": false,
       "locked": {
@@ -88,6 +104,7 @@
     },
     "root": {
       "inputs": {
+        "binutils-gdb": "binutils-gdb",
         "cemu-ti": "cemu-ti",
         "convbin": "convbin",
         "flake-utils": "flake-utils",

@@ -6,6 +6,10 @@
             url = "github:CE-Programming/llvm-project";
             flake = false;
         };
+        binutils-gdb = {
+            url = "github:CE-Programming/binutils-gdb";
+            flake = false;
+        };
         toolchain = {
             flake = false;
             type = "git";
@@ -54,23 +58,25 @@
                 };
                 formatter = pkgs.alejandra;
                 packages = let
-                    callPackage = lib.callPackageWith pkgs;
-                    callPackageSelf = lib.callPackageWith (pkgs // pkgsSelf);
+                    callPackage = lib.callPackageWith (pkgs // pkgsSelf);
                 in {
-                    fasmg-patch = callPackage ./packages/fasmg {};
-                    convbin-unstable = callPackage ./packages/convbin {convbin-src = convbin;};
-                    llvm-ez80 = callPackage ./packages/llvm-ez80 {
+                    fasmg-patch = callPackage ./pkgs/fasmg {};
+                    convbin-unstable = callPackage ./pkgs/convbin {convbin-src = convbin;};
+                    llvm-ez80 = callPackage ./pkgs/llvm-ez80 {
                         llvm-ez80-src = llvm-ez80;
                         stdenv = pkgs.llvmPackages.stdenv;
                     };
-                    ce-libs = callPackageSelf ./packages/ce-libs {};
-                    ce-toolchain = callPackageSelf ./packages/ce-toolchain {
+                    binutils-gdb = callPackage ./pkgs/binutils-gdb {
+                        binutils-gdb-src = inputs.binutils-gdb;
+                    };
+                    ce-libs = callPackage ./pkgs/ce-libs {};
+                    ce-toolchain = callPackage ./pkgs/ce-toolchain {
                         ce-toolchain-src = toolchain;
                     };
-                    cemu-ti = callPackage ./packages/cemu-ti {
+                    cemu-ti = callPackage ./pkgs/cemu-ti {
                         cemu-ti-src = inputs.cemu-ti;
                     };
-                    mkDerivation = callPackageSelf ./packages/mkDerivation {};
+                    mkDerivation = callPackage ./pkgs/mkDerivation {};
                 };
             });
 }

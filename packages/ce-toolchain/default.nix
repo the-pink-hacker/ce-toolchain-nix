@@ -22,17 +22,15 @@ stdenv.mkDerivation {
         substituteInPlace tools/convimg/Makefile tools/cedev-config/Makefile \
           --replace-fail "-static" ""
         substituteInPlace src/makefile.mk \
-          --replace-fail "\$(call NATIVEPATH,\$(BIN)/fasmg)" "${fasmg-patch}/bin/fasmg" \
-          --replace-fail "\$(call NATIVEPATH,\$(BIN)/convbin)" "${convbin-unstable}/bin/convbin" \
-          --replace-fail "\$(call NATIVEPATH,\$(BIN)/convimg)" "${convimg}/bin/convimg" \
-          --replace-fail "\$(call NATIVEPATH,\$(BIN)/cemu-autotester)" "cemu-autotester" \
-          --replace-fail "\$(call NATIVEPATH,\$(BIN)/ez80-clang)" "${llvm-ez80}/bin/ez80-clang" \
-          --replace-fail "\$(call NATIVEPATH,\$(BIN)/ez80-link)" "${llvm-ez80}/bin/ez80-link" \
+          --replace-fail "\$(call NATIVEPATH,\$(BIN)/convbin\$(EXE_SUFFIX))" "${convbin-unstable}/bin/convbin" \
+          --replace-fail "\$(call NATIVEPATH,\$(BIN)/convimg\$(EXE_SUFFIX))" "${convimg}/bin/convimg" \
+          --replace-fail "\$(call NATIVEPATH,\$(BIN)/cemu-autotester\$(EXE_SUFFIX))" "cemu-autotester" \
+          --replace-fail "\$(call NATIVEPATH,\$(BIN)/ez80-clang\$(EXE_SUFFIX))" "${llvm-ez80}/bin/ez80-clang" \
+          --replace-fail "\$(call NATIVEPATH,\$(BIN)/ez80-link\$(EXE_SUFFIX))" "${llvm-ez80}/bin/ez80-link" \
           --replace-fail "CONVBINFLAGS += -b \$(call QUOTE_ARG,\$(COMMENT))" ""
     '';
     doCheck = true;
     enableParallelBuilding = true;
-
     buildInputs = [
         convimg
         convfont
@@ -41,7 +39,7 @@ stdenv.mkDerivation {
         convbin-unstable
     ];
     meta = {
-        description = "Toolchain and libraries for C/C++ programming on the TI-84+ CE calculator series ";
+        description = "Toolchain and libraries for C/C++ programming on the TI-84+ CE calculator series";
         #maintainers = with lib.maintainers; [clevor];
         mainProgram = "cedev-config";
         platforms = ["x86_64-linux" "x86_64-darwin"];

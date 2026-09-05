@@ -17,14 +17,13 @@ stdenv.mkDerivation {
             "INSTALL_DIR := \$(patsubst %/,%,\$(subst \\,/,\$(DESTDIR)))/\$(PREFIX)" "INSTALL_DIR := $out"
         substituteInPlace makefile --replace-fail \
             "TOOLS := fasmg convbin convimg convfont cedev-config cedev-obj" \
-            "TOOLS := fasmg cedev-config" \
+            "TOOLS := fasmg cedev-config cedev-obj" \
             --replace-fail "\$(Q)\$(call COPY,\$(call NATIVEEXE,tools/convfont/convfont),\$(INSTALL_BIN))" "" \
             --replace-fail "\$(Q)\$(call COPY,\$(call NATIVEEXE,tools/convimg/bin/convimg),\$(INSTALL_BIN))" "" \
             --replace-fail "\$(Q)\$(call COPY,\$(call NATIVEEXE,tools/convbin/bin/convbin),\$(INSTALL_BIN))" "" \
-            --replace-fail "\$(Q)\$(call COPY,\$(call NATIVEEXE,tools/cedev-obj/bin/cedev-obj),\$(INSTALL_BIN))" "" \
             --replace-fail "tools/convbin/bin/" "" \
             --replace-fail "--oformat 8xg-auto-extract" "--iformat 8x --oformat 8xg-auto-extract"
-        substituteInPlace tools/convimg/Makefile tools/cedev-config/Makefile \
+        substituteInPlace tools/convimg/Makefile tools/cedev-config/Makefile tools/cedev-obj/Makefile \
             --replace-fail "-static" ""
         substituteInPlace src/makefile.mk \
             --replace-fail "\$(call NATIVEPATH,\$(BIN)/convbin\$(EXE_SUFFIX))" "${convbin-unstable}/bin/convbin" \

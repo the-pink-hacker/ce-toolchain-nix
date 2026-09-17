@@ -7,6 +7,9 @@
     qt6,
     libarchive,
     libpng,
+    libusb1,
+    lua5_5,
+    sol2,
     cemu-ti-src,
 }:
 stdenv.mkDerivation (finalAttrs: {
@@ -32,6 +35,9 @@ stdenv.mkDerivation (finalAttrs: {
         qt6.qtbase
         libarchive
         libpng
+        libusb1
+        lua5_5
+        sol2
     ];
     meta = {
         description = "Third-party TI-84 Plus CE / TI-83 Premium CE emulator, focused on developer features";

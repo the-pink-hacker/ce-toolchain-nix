@@ -8,8 +8,9 @@
     libarchive,
     libpng,
     libusb1,
-    lua5_5,
+    lua5_4,
     sol2,
+    ninja,
     cemu-ti-src,
 }:
 stdenv.mkDerivation (finalAttrs: {
@@ -30,13 +31,14 @@ stdenv.mkDerivation (finalAttrs: {
         cmake
         qt6.wrapQtAppsHook
         pkg-config
+        ninja
     ];
     buildInputs = [
         qt6.qtbase
         libarchive
         libpng
         libusb1
-        lua5_5
+        lua5_4
         sol2
     ];
     meta = {
